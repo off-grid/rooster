@@ -1,0 +1,23 @@
+{
+  "local": {
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "twilioDb",
+    "driver": "mysql"
+  },
+  "test": {
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "twilioDbTest",
+    "driver": "mysql"
+  },
+  "travis": {
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "twilioDbTest",
+    "driver": "mysql"
+  }
+}
