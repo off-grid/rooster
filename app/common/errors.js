@@ -3,13 +3,13 @@
 var util = require("util");
 var _ = require("lodash");
 
-function UserExists(userName) {
-    this.message = "User exists: " + userName;
+function UserExists(phoneNo) {
+    this.message = "Phone number exists: " + phoneNo;
 }
 util.inherits(UserExists, Error);
 
-function UserNotFound(userName) {
-    this.message = "User does not exist: " + userName;
+function UserNotFound(phoneNo) {
+    this.message = "Phone number does not exist: " + phoneNo;
 }
 util.inherits(UserNotFound, Error);
 
