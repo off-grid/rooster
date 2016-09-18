@@ -5,6 +5,8 @@ var errors = require('../common/errors');
 
 module.exports = function (models, authenticationHelpers) {
 
+    var NUMBER_EXISTS_ERR_CODE = 21450;
+
     var getUserByPhoneNumber = function getUserByPhoneNumber(phoneNo) {
         return models.User.findAll({
             where: {phone: phoneNo}
@@ -34,6 +36,7 @@ module.exports = function (models, authenticationHelpers) {
     }
 
     return {
+        NUMBER_EXISTS_ERR_CODE: NUMBER_EXISTS_ERR_CODE,
         getUserByPhoneNumber: getUserByPhoneNumber,
         registerUser: registerUser,
         generateTwilioMessage: generateTwilioMessage,

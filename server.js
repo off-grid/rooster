@@ -79,7 +79,7 @@ server.use(function (req, res, next) {
 });
 
 // Routes
-server.get('/v1/users/', twilioHandlers.receive);
+server.get('/v1/receive/', twilioHandlers.receive);
 
 sequelize.authenticate().then(function () {
     console.log('Connection has been established successfully');

@@ -24,13 +24,20 @@ module.exports = function (twilioHelpers) {
                 res.end(twilioHelpers.generateTwilioMessage("User already exists"));
                 next();
             }).catch(errors.UserNotFoundError, function() {
-                console.log("Creating a new user: ", phoneNo, fromCountry, fromState, fromCity);
                 twilio.outgoingCallerIds.create({
                     phoneNumber: phoneNo,
                 }, function(err, callerId){
-                    if (err){
-                        console.log('error registering the number: ', err);
+                    if (err && err.code !== twilioHelpers.NUMBER_EXISTS_ERR_CODE){
+                        console.log('Error registering the number: ', err);
                         next();
+                    } else if (err && err.code === twilioHelpers.NUMBER_EXISTS_ERR_CODE){
+                        // Number is registered but not in our db
+                        res.end(twilioHelpers.generateTwilioMessage("User already exists. Syncing with db..."));
+                        twilioHelpers.registerUser(phoneNo, fromCountry, fromState, fromCity)
+                            .then(function (user) {
+                                res.end(twilioHelpers.generateTwilioMessage("New user registered"));
+                                next();
+                            }).catch(errors.UserExistsError, sendError(httpErrors.ConflictError, next));
                     } else {
                         twilioHelpers.registerUser(phoneNo, fromCountry, fromState, fromCity)
                             .then(function (user) {
