@@ -5,7 +5,10 @@ var httpErrors = require('restify').errors;
 var errors = require('../common/errors');
 var sendError = require('../common/sendError');
 var validateParams = require('../common/validateParams');
-var twilio = require('twilio');
+
+var accountSid = 'ACfdbfa61c4e8e51354235ebeaeb1088a9';
+var authToken = '0477ba33e8b8fc8480ea0250c87841f8';
+var twilio = require('twilio')(accountSid, authToken);
 
 module.exports = function (twilioHelpers) {
 
@@ -22,11 +25,20 @@ module.exports = function (twilioHelpers) {
                 next();
             }).catch(errors.UserNotFoundError, function() {
                 console.log("Creating a new user: ", phoneNo, fromCountry, fromState, fromCity);
-                twilioHelpers.registerUser(phoneNo, fromCountry, fromState, fromCity)
-                    .then(function (user) {
-                        res.end(twilioHelpers.generateTwilioMessage("New user registered"));
+                twilio.outgoingCallerIds.create({
+                    phoneNumber: phoneNo,
+                }, function(err, callerId){
+                    if (err){
+                        console.log('error registering the number: ', err);
                         next();
-                    }).catch(errors.UserExistsError, sendError(httpErrors.ConflictError, next));
+                    } else {
+                        twilioHelpers.registerUser(phoneNo, fromCountry, fromState, fromCity)
+                            .then(function (user) {
+                                res.end(twilioHelpers.generateTwilioMessage("New user registered"));
+                                next();
+                            }).catch(errors.UserExistsError, sendError(httpErrors.ConflictError, next));
+                    }
+                });
             });
     };
 
