@@ -49,7 +49,43 @@ module.exports = function (twilioHelpers) {
             });
     };
 
+    var register = function register(req, res, next){
+        twilio.outgoingCallerIds.list(function(err, data) {
+            var phone = req.params.phone;
+            var response = {
+                verified: false,
+                validationCode: null
+            };
+
+            data.outgoingCallerIds.forEach(function(callerId) {
+                if (callerId.phoneNumber === phone){
+                    response.verified = true;
+                }
+            });
+
+            if (!response.verified) {
+                twilio.outgoingCallerIds.create({
+                    phoneNumber: phone,
+                }, function(err, callerId){
+                    console.log("CallerID: ", callerId);
+                    response.validationCode = callerId.validationCode;
+                    res.json(200, response);
+                    next();
+                });
+            } else {
+                res.json(200, response);
+                next();
+            }
+        });
+    };
+
+    var statusCheck = function statusCheck(req, res, next){
+
+    };
+
     return {
         receive: receive,
+        register: register,
+        statusCheck: statusCheck,
     };
 };

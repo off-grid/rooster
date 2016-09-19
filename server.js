@@ -40,17 +40,6 @@ var restifyLogger = new bunyan({
 // TODO: @Wasiur is this formatter for xml needed?
 var server = restify.createServer({
     log: restifyLogger,
-    formatters: {
-       'application/xml' : function( req, res, body, cb ) {
-            if (body instanceof Error)
-                return body.stack;
-
-            if (Buffer.isBuffer(body))
-                return cb(null, body.toString('base64'));
-
-            return cb(null, body);
-        }
-    }
 });
 
 // Add audit logging
@@ -79,12 +68,18 @@ server.use(function (req, res, next) {
 });
 
 // Routes
+// Send sms to this route from the client-side app
 server.get('/v1/receive/', twilioHandlers.receive);
+// Initial route that is hit when the phone is not yet registered
+server.post('/v1/register/', twilioHandlers.register);
+// Check the status of registered phone number
+server.get('/v1/status/:phone', twilioHandlers.statusCheck);
+
 
 sequelize.authenticate().then(function () {
     console.log('Connection has been established successfully');
-    // use force: true to drop the db and make a new db from the schema
-    sequelize.sync({force: true}).then(function () {
+    // use .sync{ force: true } to drop the db and make a new db from the schema
+    sequelize.sync().then(function () {
         server.listen(config.port, function () {
             console.log(' --- Listening to %s --- ', server.url);
         });
