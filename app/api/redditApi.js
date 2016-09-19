@@ -1,15 +1,14 @@
-/**
- * Created by owenchen on 16-09-18.
- */
 
 var request = require('request');
-
 
 module.exports = function () {
 
     var TYPE = "reddit";
 
-    var getJsonByUrl = function getJsonByUrl(url, callback) {
+    var getJsonByUrl = function getJsonByUrl(subreddit, callback) {
+        var url = "http://reddit.com/r/{subreddit}.json";
+        url = url.replace("{subreddit}",subreddit.trim());
+
         request(url, function (error, res, body) {
             if (error) {
                 console.log(error);
@@ -46,7 +45,16 @@ module.exports = function () {
     }
 
     function populateNode(raw, depth) {
-        var node = {text: "", score: "", author: "", time: "", num_children: "", id: "", children: []};
+        var node = {
+            text: "",
+            score: "",
+            author: "",
+            time: "",
+            num_children: "",
+            id: "",
+            children: []
+        };
+
         var data = raw.data;
 
         node.text = data.title;

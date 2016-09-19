@@ -12,9 +12,8 @@ module.exports = function (userHelpers) {
 
     var receive = function receive(req, res, next) {
         res.setHeader('content-type', 'application/xml');
-        var url = "http://reddit.com/r/{subreddit}.json";
 
-        reddit.getJsonByUrl(url.replace("{subreddit}",req.params.Body), function(message){
+        reddit.getJsonByUrl(req.params.Body, function(message){
                 res.end("<Response><Message>" + JSON.stringify(message) + "</Message></Response>");
             }
         );
