@@ -6,7 +6,7 @@ env:
   global:
   - envName=travis
 before_script:
-- mysql -e "create database photojournaltest;"
+- mysql -e "create database twilioDbTest;"
 after_success:
 - istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat
   ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js

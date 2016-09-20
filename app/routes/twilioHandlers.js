@@ -5,14 +5,9 @@ var httpErrors = require('restify').errors;
 var errors = require('../common/errors');
 var sendError = require('../common/sendError');
 var validateParams = require('../common/validateParams');
-
-var accountSid = '';
-var authToken = '';
-var twilio = require('twilio')(accountSid, authToken);
 var reddit = require('../api/redditApi')();
 
-
-module.exports = function (twilioHelpers) {
+module.exports = function (twilioHelpers, twilio) {
 
     var receive = function receive(req, res, next) {
         res.setHeader('content-type', 'application/xml');
