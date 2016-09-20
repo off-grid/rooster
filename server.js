@@ -3,6 +3,7 @@
 var restify = require('restify');
 var bunyan = require('bunyan');
 var config = require('./config/default');
+var twilio = require('twilio')(config.twilio.sid, config.twilio.auth);
 var sequelize = require('./config/db')(config);
 var models = require('./app/models')(sequelize);
 var _ = require('lodash');
@@ -10,7 +11,7 @@ var _ = require('lodash');
 var authenticationHelpers = require('./app/common/authentication')(config);
 
 var twilioHelpers = require('./app/helpers/twilioHelpers')(models, authenticationHelpers);
-var twilioHandlers = require('./app/routes/twilioHandlers')(twilioHelpers);
+var twilioHandlers = require('./app/routes/twilioHandlers')(twilioHelpers, twilio);
 
 var userHelpers = require('./app/helpers/userHelpers')(models, authenticationHelpers);
 var userHandlers = require('./app/routes/userHandlers')(userHelpers);
