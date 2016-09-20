@@ -8,15 +8,19 @@
       }
   },
   "test": {
-      "ENV": {
-        "sid": "twilioSid",
-        "auth": "twilioAuth"
+      "sid": {
+          "ENV": "TWILIOSID"
+      },
+      "auth": {
+          "ENV": "TWILIOAUTH"
       }
   },
   "travis": {
-      "ENV": {
-        "sid": "twilioSid",
-        "auth": "twilioAuth"
+      "sid": {
+          "ENV": "TWILIOSID"
+      },
+      "auth": {
+          "ENV": "TWILIOAUTH"
       }
   }
 }
