@@ -3,7 +3,7 @@ var request = require('request');
 
 module.exports = function () {
 
-    var TYPE = "reddit";
+    var SERVICE_NAME = "reddit";
 
     var getRequestUrl = function getRequestUrl(request) {
         var params = request.split(" ");
@@ -42,7 +42,7 @@ module.exports = function () {
         var root = {type: "", children: []};
         var parsed = JSON.parse(raw);
         var children = [];
-        root.type = TYPE;
+        root.type = SERVICE_NAME;
         parsed = parsed[parsed.length - 1];
 
         for(i = 0; i < 5; i++) {
