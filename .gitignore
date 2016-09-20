@@ -29,3 +29,6 @@ node_modules
 
 # ngrok should not be version controlled
 ngrok
+
+# web storm .idea 
+.idea
