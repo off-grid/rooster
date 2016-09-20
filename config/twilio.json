@@ -1,0 +1,22 @@
+{
+  "local": {
+      "sid": {
+          "ENV": "TWILIOSID"
+      },
+      "auth": {
+          "ENV": "TWILIOAUTH"
+      }
+  },
+  "test": {
+      "ENV": {
+        "sid": "twilioSid",
+        "auth": "twilioAuth"
+      }
+  },
+  "travis": {
+      "ENV": {
+        "sid": "twilioSid",
+        "auth": "twilioAuth"
+      }
+  }
+}
