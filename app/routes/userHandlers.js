@@ -34,7 +34,6 @@ module.exports = function (userHelpers) {
                 })
                 .catch(errors.UserExistsError, sendError(httpErrors.ConflictError, next));
         }).catch(errors.ValidationError, sendError(httpErrors.BadRequestError, next));
-
     };
 
     var del = function del(req, res, next) {
