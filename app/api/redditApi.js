@@ -5,6 +5,10 @@ module.exports = function () {
 
     var SERVICE_NAME = "reddit";
 
+    var getServiceName = function getGetServiceName(){
+        return SERVICE_NAME;
+    }
+
     var getRequestUrl = function getRequestUrl(request) {
         var params = request.split(" ");
 
@@ -53,10 +57,6 @@ module.exports = function () {
         callback(root);
     }
 
-    return {
-        getJsonByUrl : getJsonByUrl
-    }
-
     function populateNode(raw, depth) {
         var node = {
             text: "",
@@ -94,5 +94,10 @@ module.exports = function () {
         }
 
         return node;
+    }
+
+    return {
+        getJsonByUrl : getJsonByUrl,
+        getServiceName : getServiceName
     }
 }
