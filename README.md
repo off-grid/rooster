@@ -49,6 +49,18 @@ mysql> CREATE DATABASE twiliodb; // Create it
 mysql> exit;
 ```
 
+## API:
+### Subreddit
+To request the json for a subreddit. Send the message **subreddit \<subreddit\>**
+*eg: subreddit all, subreddit funny*
+
+### Comments
+To request the json for comments of a specific reddit thread. Send the message **comments \<subreddit of comment\> \<comment-id\> **
+*eg: comments funny 53lu2x*
+
+**Comment ID can be retrieved from the id element of responses**
+
+
 ## Workflow:
 ### Adding Dependencies
 The `--save` flag adds the dependency to the `package.json` file. Thats the file which is used to determine which packages to install during `npm install`.
