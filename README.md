@@ -49,33 +49,6 @@ mysql> CREATE DATABASE twiliodb; // Create it
 mysql> exit;
 ```
 
-## API:
-### Subreddit
-To request the json for a subreddit. Send the message **subreddit \<subreddit\>**
-
-*eg: subreddit all, subreddit funny*
-
-The response will look like this:
-
-```
-{"type":"reddit","children":[{"text":"","score":2624,"author":"DieMikrowelle","time":1474413836,"num_children":"","id":"d7uocg1","children":[]},{"text":"","score":3344,"author":"alphacentaurai","time":1474409725,"num_children":"","id":"d7ul9fd","children":[]},{"text":"","score":4024,"author":"The_Red_Paw","time":1474409266,"num_children":"","id":"d7uky9o","children":[]},{"text":"","score":8714,"author":"RingoStarrVevo","time":1474412370,"num_children":"","id":"d7un82v","children":[]},{"text":"","score":102,"author":"maurosQQ","time":1474412927,"num_children":"","id":"d7unn6c","children":[]}]}
-```
-
-### Comments
-To request the json for comments of a specific reddit thread. Send the message **comments \<subreddit of comment\> \<comment-id\>**
-
-*eg: comments funny 53lu2x*
-
-The response will look like this:
-
-```
-{"type":"reddit","children":
-[{"text":"","score":396,"author":"Lucflip","time":1474379271,"num_children":6,"id":"d7u9byb","children":[]},{"text":"","score":111,"author":"timesuck897","time":1474401657,"num_children":3,"id":"d7ugpml","children":[]},{"text":"","score":30,"author":"iznottatoomah","time":1474407216,"num_children":"0","id":"d7ujmu7","children":[]},{"text":"","score":147,"author":"sirJackHandy","time":1474380007,"num_children":3,"id":"d7u9mg8","children":[]},{"text":"","score":40,"author":"-MadameOvaries-","time":1474376636,"num_children":1,"id":"d7u84k0","children":[]}]}
-```
-
-**Comment ID can be retrieved from the id element of responses**
-
-
 ## Workflow:
 ### Adding Dependencies
 The `--save` flag adds the dependency to the `package.json` file. Thats the file which is used to determine which packages to install during `npm install`.
