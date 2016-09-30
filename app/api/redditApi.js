@@ -47,7 +47,10 @@ module.exports = function () {
         var parsed = JSON.parse(raw);
         var children = [];
         root.type = SERVICE_NAME;
-        parsed = parsed[parsed.length - 1];
+
+        if(parsed.length > 1) {
+            parsed = parsed[parsed.length - 1];
+        }
 
         for(i = 0; i < 5; i++) {
             children.push(populateNode(parsed.data.children[i], 1));
