@@ -52,10 +52,12 @@ mysql> exit;
 ## API:
 ### Subreddit
 To request the json for a subreddit. Send the message **subreddit \<subreddit\>**
+
 *eg: subreddit all, subreddit funny*
 
 ### Comments
-To request the json for comments of a specific reddit thread. Send the message **comments \<subreddit of comment\> \<comment-id\> **
+To request the json for comments of a specific reddit thread. Send the message **comments \<subreddit of comment\> \<comment-id\>**
+
 *eg: comments funny 53lu2x*
 
 **Comment ID can be retrieved from the id element of responses**
